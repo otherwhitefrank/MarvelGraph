@@ -8,6 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+
 import edu.uci.ics.jung.algorithms.shortestpath.DijkstraShortestPath;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.SparseMultigraph;
@@ -76,12 +77,16 @@ public class SimpleGraphView {
 		// graphs.
 
 		DijkstraShortestPath<String, String> alg = new DijkstraShortestPath(g);
+		Map<String, Number> distMap = new HashMap<String,Number>();
 		String n1 = "VOLSTAGG";
 		String n4 = "ROM, SPACEKNIGHT";
 		List<String> l = alg.getPath(n1, n4);
+		distMap = alg.getDistanceMap(n1);
 		System.out.println("The shortest unweighted path from " + n1 + " to "
 				+ n4 + " is:");
 		System.out.println(l.toString());
+		
+		System.out.println("\nDistance Map: " + distMap.get(n4));
 	}
 
 	public void processLine(String nextLine, Map<String, List<String>> map1,
